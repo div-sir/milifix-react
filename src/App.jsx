@@ -49,8 +49,10 @@ function App() {
             <Paragraph italic style={{ color: '#b6e0fe', textAlign: 'center' }}>{story.vision}</Paragraph>
           </div>
         </Content>
-        <Footer style={{ background: 'rgba(20,28,44,0.85)', color: '#b6e0fe', textAlign: 'center' }}>
-          &copy; 2024 MILIFIX 集團 | Unlock the Extraordinary
+        <Footer style={{ background: 'rgba(20,28,44,0.85)', color: '#b6e0fe', textAlign: 'center', width: '100%', padding: '24px 0', fontSize: 16 }}>
+          &copy; 2024 MILIFIX 集團 | Unlock the Extraordinary<br/>
+          聯絡信箱：info@milifix.org ｜ 地址：台北市信義區未來路88號 ｜ 服務專線：02-1234-5678<br/>
+          <span style={{ color: '#888', fontSize: 14 }}>本網站僅供展示，所有資料僅供參考，未經授權請勿轉載。</span>
         </Footer>
       </Layout>
     </ConfigProvider>
