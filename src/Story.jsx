@@ -1,38 +1,57 @@
 import React from 'react';
+import { Layout, Typography, ConfigProvider, Menu } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
+const { Header, Content, Footer } = Layout;
+const { Title, Paragraph } = Typography;
+
+const navItems = [
+  { key: 'tech', label: '科技', path: '/tech.html' },
+  { key: 'art', label: '藝術', path: '/art.html' },
+  { key: 'project', label: '專案', path: '/project.html' },
+  { key: 'team', label: '人員介紹', path: '/team.html' },
+  { key: 'story', label: '品牌故事', path: '/story' },
+];
 
 export default function Story() {
+  // 若未用 react-router-dom，可用 window.location 取代 useNavigate
+  const navigate = (path) => { window.location.href = path; };
+
   return (
-    <>
-      <canvas className="stars"></canvas>
-      <header>
-        <div className="logo">MILIFIX</div>
-        <nav id="navbar">
-          <a href="/tech.html" data-section="tech">科技</a>
-          <a href="/art.html" data-section="art">藝術</a>
-          <a href="/project.html" data-section="project">專案</a>
-          <a href="/team.html" data-section="team">人員介紹</a>
-          <a href="/story" data-section="story" className="active">品牌故事</a>
-          <div className="lang-switch">
-            <div className="lang-dropdown">
-              <div className="lang-selected"><span className="globe">🌐</span></div>
-              <div className="lang-list"></div>
-            </div>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#4ad',
+          fontFamily: "'Montserrat', 'Orbitron', Arial, sans-serif"
+        }
+      }}
+    >
+      <Layout style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #0a0f1a 0%, #1a223a 100%)' }}>
+        <Header style={{ background: 'rgba(20,28,44,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div className="logo" style={{ color: '#b6e0fe', fontSize: 28, fontWeight: 'bold', letterSpacing: 2, fontFamily: 'Orbitron, Arial, sans-serif' }}>MILIFIX</div>
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            selectedKeys={['story']}
+            items={navItems.map(item => ({
+              key: item.key,
+              label: <span onClick={() => navigate(item.path)}>{item.label}</span>
+            }))}
+            style={{ background: 'rgba(20,28,44,0.0)', fontSize: 18, minWidth: 400 }}
+          />
+        </Header>
+        <Content style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}>
+          <div style={{ background: 'rgba(30,40,60,0.7)', borderRadius: 24, padding: 36, maxWidth: 700, width: '90vw', margin: '48px 0' }}>
+            <Title level={1} style={{ color: '#b6e0fe', textAlign: 'center', fontFamily: 'Orbitron, Arial, sans-serif' }}>品牌故事</Title>
+            <Paragraph strong style={{ color: '#eee', textAlign: 'center' }}>
+              歡迎來到 MILIFIX！這裡是品牌故事頁面，請依需求補充內容。
+            </Paragraph>
           </div>
-        </nav>
-      </header>
-      <main>
-        <div className="content-glass">
-          <div className="glow"></div>
-          <h1 id="main-title">品牌故事</h1>
-          <div id="main-content" className="section-content">
-            {/* 這裡可根據需求填入品牌故事內容，或從 public/data/content-zh.json 讀取 */}
-            歡迎來到 MILIFIX！這裡是品牌故事頁面，請依需求補充內容。
-          </div>
-        </div>
-      </main>
-      <footer>
-        &copy; 2024 MILIFIX 集團 | Unlock the Extraordinary
-      </footer>
-    </>
+        </Content>
+        <Footer style={{ background: 'rgba(20,28,44,0.85)', color: '#b6e0fe', textAlign: 'center' }}>
+          &copy; 2024 MILIFIX 集團 | Unlock the Extraordinary
+        </Footer>
+      </Layout>
+    </ConfigProvider>
   );
 } 
