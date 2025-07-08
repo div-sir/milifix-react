@@ -27,7 +27,7 @@ export default function Story() {
         }
       }}
     >
-      <div style={{ minHeight: '100vh', background: '#f9f9f9' }}>
+      <div style={{ minHeight: '100vh', background: '#fff' }}>
         <NavBar active="story" />
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh', padding: '2vw' }}>
           <div style={{ background: '#fff', borderRadius: 24, boxShadow: '0 4px 24px 0 #0001', padding: 36, maxWidth: 700, width: '100%', margin: '48px 0' }}>
