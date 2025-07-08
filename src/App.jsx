@@ -2,6 +2,7 @@ import { Layout, Typography, Timeline, ConfigProvider } from 'antd';
 import 'antd/dist/reset.css';
 import './App.css';
 import Story from './Story';
+import NavBar from './NavBar';
 //import { Fireflies } from 'react-bits';
 
 const { Header, Content, Footer } = Layout;
@@ -33,11 +34,9 @@ function App() {
       }}
     >
       <Layout style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #0a0f1a 0%, #1a223a 100%)' }}>
-        <Header style={{ background: 'rgba(20,28,44,0.85)' }}>
-          <div className="logo" style={{ color: '#b6e0fe', fontSize: 28, fontWeight: 'bold', letterSpacing: 2, fontFamily: 'Orbitron, Arial, sans-serif' }}>MILIFIX</div>
-        </Header>
-        <Content style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-          <div style={{ background: 'rgba(30,40,60,0.7)', borderRadius: 24, padding: 36, maxWidth: 700, width: '90vw', margin: '48px 0' }}>
+        <NavBar active="home" />
+        <Content style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1, padding: '2vw' }}>
+          <div style={{ background: 'rgba(30,40,60,0.7)', borderRadius: 24, padding: 36, maxWidth: 700, width: '100%', margin: '48px 0' }}>
             <Title level={1} style={{ color: '#b6e0fe', textAlign: 'center', fontFamily: 'Orbitron, Arial, sans-serif' }}>{story.title}</Title>
             <Paragraph strong style={{ color: '#eee', textAlign: 'center' }}>{story.intro}</Paragraph>
             <Timeline

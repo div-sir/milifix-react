@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout, Typography, ConfigProvider, Menu } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import NavBar from './NavBar';
 
 const { Header, Content, Footer } = Layout;
 const { Title, Paragraph } = Typography;
@@ -27,21 +28,9 @@ export default function Story() {
       }}
     >
       <Layout style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #0a0f1a 0%, #1a223a 100%)' }}>
-        <Header style={{ background: 'rgba(20,28,44,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <div className="logo" style={{ color: '#b6e0fe', fontSize: 28, fontWeight: 'bold', letterSpacing: 2, fontFamily: 'Orbitron, Arial, sans-serif' }}>MILIFIX</div>
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            selectedKeys={['story']}
-            items={navItems.map(item => ({
-              key: item.key,
-              label: <span onClick={() => navigate(item.path)}>{item.label}</span>
-            }))}
-            style={{ background: 'rgba(20,28,44,0.0)', fontSize: 18, minWidth: 400 }}
-          />
-        </Header>
-        <Content style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-          <div style={{ background: 'rgba(30,40,60,0.7)', borderRadius: 24, padding: 36, maxWidth: 700, width: '90vw', margin: '48px 0' }}>
+        <NavBar active="story" />
+        <Content style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1, padding: '2vw' }}>
+          <div style={{ background: 'rgba(30,40,60,0.7)', borderRadius: 24, padding: 36, maxWidth: 700, width: '100%', margin: '48px 0' }}>
             <Title level={1} style={{ color: '#b6e0fe', textAlign: 'center', fontFamily: 'Orbitron, Arial, sans-serif' }}>品牌故事</Title>
             <Paragraph strong style={{ color: '#eee', textAlign: 'center' }}>
               歡迎來到 MILIFIX！這裡是品牌故事頁面，請依需求補充內容。
