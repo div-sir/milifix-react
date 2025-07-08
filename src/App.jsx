@@ -1,5 +1,5 @@
 import './App.css';
-import { Fireflies } from 'react-bits';
+//import { Fireflies } from 'react-bits';
 
 const story = {
   title: '品牌故事',
@@ -15,7 +15,7 @@ const story = {
 function App() {
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #0a0f1a 0%, #1a223a 100%)', color: '#eee', fontFamily: "'Montserrat', 'Orbitron', Arial, sans-serif" }}>
-      <Fireflies color="#4ad" count={32} style={{ position: 'fixed', width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none', top: 0, left: 0 }} />
+      {/* <Fireflies color="#4ad" count={32} style={{ position: 'fixed', width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none', top: 0, left: 0 }} /> */}
       <header style={{ width: '100%', background: 'rgba(20,28,44,0.85)', boxShadow: '0 2px 16px 0 #0004', backdropFilter: 'blur(8px)', position: 'sticky', top: 0, zIndex: 10, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 32px' }}>
         <div className="logo" style={{ fontFamily: 'Orbitron, Arial, sans-serif', fontSize: '2em', color: '#b6e0fe', letterSpacing: '0.12em', fontWeight: 'bold', textShadow: '0 0 16px #4ad, 0 0 4px #fff2', padding: '16px 0' }}>MILIFIX</div>
         <nav style={{ display: 'flex', gap: 24, alignItems: 'center' }}>
