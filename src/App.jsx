@@ -1,6 +1,7 @@
 import { Layout, Typography, Timeline, ConfigProvider } from 'antd';
 import 'antd/dist/reset.css';
 import './App.css';
+import Story from './Story';
 //import { Fireflies } from 'react-bits';
 
 const { Header, Content, Footer } = Layout;
@@ -18,6 +19,10 @@ const story = {
 };
 
 function App() {
+  // 簡易路由：根據網址顯示 Story 或首頁
+  const isStory = window.location.pathname === '/story';
+  if (isStory) return <Story />;
+
   return (
     <ConfigProvider
       theme={{
