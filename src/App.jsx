@@ -3,6 +3,10 @@ import 'antd/dist/reset.css';
 import './App.css';
 import Story from './Story';
 import NavBar from './NavBar';
+import Tech from './Tech';
+import Art from './Art';
+import Project from './Project';
+import Team from './Team';
 //import { Fireflies } from 'react-bits';
 
 const { Header, Content, Footer } = Layout;
@@ -20,9 +24,12 @@ const story = {
 };
 
 function App() {
-  // 簡易路由：根據網址顯示 Story 或首頁
-  const isStory = window.location.pathname === '/story';
-  if (isStory) return <Story />;
+  const path = window.location.pathname;
+  if (path === '/story') return <Story />;
+  if (path === '/tech') return <Tech />;
+  if (path === '/art') return <Art />;
+  if (path === '/project') return <Project />;
+  if (path === '/team') return <Team />;
 
   return (
     <ConfigProvider
