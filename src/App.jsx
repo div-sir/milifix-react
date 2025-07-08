@@ -35,33 +35,33 @@ function App() {
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: '#4ad',
+          colorPrimary: '#0071e3',
           fontFamily: "'Montserrat', 'Orbitron', Arial, sans-serif"
         }
       }}
     >
-      <Layout style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #0a0f1a 0%, #1a223a 100%)' }}>
+      <div style={{ minHeight: '100vh', background: '#f9f9f9' }}>
         <NavBar active="home" />
-        <Content style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1, padding: '2vw' }}>
-          <div style={{ background: 'rgba(30,40,60,0.7)', borderRadius: 24, padding: 36, maxWidth: 700, width: '100%', margin: '48px 0' }}>
-            <Title level={1} style={{ color: '#b6e0fe', textAlign: 'center', fontFamily: 'Orbitron, Arial, sans-serif' }}>{story.title}</Title>
-            <Paragraph strong style={{ color: '#eee', textAlign: 'center' }}>{story.intro}</Paragraph>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh', padding: '2vw' }}>
+          <div style={{ background: '#fff', borderRadius: 24, boxShadow: '0 4px 24px 0 #0001', padding: 36, maxWidth: 700, width: '100%', margin: '48px 0' }}>
+            <Title level={1} style={{ color: '#222', textAlign: 'center', fontFamily: 'Orbitron, Arial, sans-serif' }}>{story.title}</Title>
+            <Paragraph strong style={{ color: '#333', textAlign: 'center' }}>{story.intro}</Paragraph>
             <Timeline
               items={story.timeline.map(item => ({
-                color: '#4ad',
+                color: '#0071e3',
                 children: <span><b>{item.year}</b> {item.event}</span>
               }))}
               style={{ margin: '2em 0' }}
             />
-            <Paragraph italic style={{ color: '#b6e0fe', textAlign: 'center' }}>{story.vision}</Paragraph>
+            <Paragraph italic style={{ color: '#0071e3', textAlign: 'center' }}>{story.vision}</Paragraph>
           </div>
-        </Content>
-        <Footer style={{ background: 'rgba(20,28,44,0.85)', color: '#b6e0fe', textAlign: 'center', width: '100%', padding: '24px 0', fontSize: 16 }}>
+        </div>
+        <div style={{ background: '#fff', color: '#888', textAlign: 'center', width: '100%', padding: '24px 0', fontSize: 16, borderTop: '1px solid #eee', marginTop: 48 }}>
           &copy; 2024 MILIFIX 集團 | Unlock the Extraordinary<br/>
           聯絡信箱：info@milifix.org ｜ 地址：台北市信義區未來路88號 ｜ 服務專線：02-1234-5678<br/>
-          <span style={{ color: '#888', fontSize: 14 }}>本網站僅供展示，所有資料僅供參考，未經授權請勿轉載。</span>
-        </Footer>
-      </Layout>
+          <span style={{ color: '#bbb', fontSize: 14 }}>本網站僅供展示，所有資料僅供參考，未經授權請勿轉載。</span>
+        </div>
+      </div>
     </ConfigProvider>
   );
 }
