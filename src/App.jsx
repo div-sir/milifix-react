@@ -60,10 +60,18 @@ function getPageKey(path) {
 function App() {
   const [location, setLocation] = useState(window.location.pathname);
   const [lang, setLang] = useState('zh');
+  const [navExpanded, setNavExpanded] = useState(true);
+  const [navTransitioning, setNavTransitioning] = useState(false);
   window.onpopstate = () => setLocation(window.location.pathname);
   const pageKey = getPageKey(location);
   const i18n = getI18n(lang);
   const pageNode = getPageNode(location, lang, i18n);
+
+  // 切換頁面時自動收合 NavBar 動畫
+  function handleNavTransition() {
+    setNavTransitioning(true);
+    setTimeout(() => setNavTransitioning(false), 600);
+  }
 
   return (
     <ConfigProvider
@@ -85,7 +93,15 @@ function App() {
             transition={{ duration: 0.35, ease: 'easeInOut' }}
             style={{ position: 'fixed', top: 0, left: 0, zIndex: 200 }}
           >
-            <NavBar active={pageKey} lang={lang} onLangChange={setLang} />
+            <NavBar
+              active={pageKey}
+              lang={lang}
+              onLangChange={setLang}
+              expanded={navExpanded}
+              setExpanded={setNavExpanded}
+              isTransitioning={navTransitioning}
+              onNavTransition={handleNavTransition}
+            />
           </motion.div>
         </AnimatePresence>
         <AnimatePresence mode="wait">
