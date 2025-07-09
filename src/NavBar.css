@@ -135,7 +135,7 @@
   color: #0071e3;
   box-shadow: 0 0 0 2px #0071e3;
   border-radius: 16px;
-  width: 56px;
+  width: 100%;
 }
 
 /* 收合狀態下 hover 維持藍色圓角方框 */
@@ -144,6 +144,7 @@
   color: #0071e3;
   box-shadow: 0 0 0 2px #0071e3;
   border-radius: 16px;
+  width: 100%;
 }
 
 .nav-float.collapsed .nav-item.active .nav-icon,
