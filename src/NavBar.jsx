@@ -63,26 +63,8 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
             onClick={() => navigate(item.path)}
             className={`nav-item${active === item.key ? ' active' : ''}`}
             title={item.label}
-            style={{
-              width: expanded ? 192 : 56,
-              height: 54,
-              borderRadius: 18,
-              background: active === item.key ? '#f2f2f7' : 'none',
-              color: active === item.key ? '#0071e3' : '#1a223a',
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'flex-start',
-              fontWeight: active === item.key ? 700 : 500,
-              fontSize: 20,
-              cursor: 'pointer',
-              transition: 'background 0.2s, color 0.2s, width 0.3s',
-              boxShadow: active === item.key ? '0 2px 8px #0071e322' : 'none',
-              paddingLeft: expanded ? 22 : 8,
-              gap: expanded ? 16 : 0,
-            }}
           >
-            <span className="nav-icon" style={{ fontSize: expanded ? 26 : 22 }}>{item.icon}</span>
+            <span className="nav-icon">{item.icon}</span>
             {expanded && <span className="nav-label">{item.label}</span>}
           </div>
         ))}
@@ -104,7 +86,7 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
         }}
         placement="rightTop"
       >
-        <div className="nav-lang-btn" style={{ marginLeft: expanded ? 18 : 8, width: expanded ? 52 : 40, height: expanded ? 52 : 40, fontSize: expanded ? 26 : 20 }}>
+        <div className="nav-lang-btn">
           <GlobalOutlined />
         </div>
       </Dropdown>
