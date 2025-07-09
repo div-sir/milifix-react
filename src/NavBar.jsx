@@ -90,7 +90,7 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
         {expanded ? '<' : '>'}
       </button>
       <AnimatePresence initial={false}>
-        {expanded && !isTransitioning && (
+        {expanded && !isTransitioning ? (
           <motion.div
             key="nav-list"
             initial={{ opacity: 0, y: 24 }}
@@ -152,8 +152,7 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
               </div>
             </Dropdown>
           </motion.div>
-        )}
-        {collapsed && (
+        ) : collapsed && (
           <motion.div
             key="nav-ellipse"
             initial={{ opacity: 0, scale: 0.8 }}
@@ -162,7 +161,7 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
             transition={{ duration: 0.4 }}
             style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
-            <span style={{ fontSize: 32, color: '#0071e3', margin: '0 auto' }}><HomeOutlined /></span>
+            {/* 只顯示橢圓條與 > 按鈕，內容完全隱藏 */}
           </motion.div>
         )}
       </AnimatePresence>
