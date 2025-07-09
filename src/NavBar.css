@@ -129,12 +129,13 @@
   box-shadow: none;
 }
 
-/* 收合狀態下 active 為白底圓形藍色描邊 */
+/* 收合狀態下 active 為白底圓角方框藍色描邊，填滿寬度 */
 .nav-float.collapsed .nav-item.active {
   background: #fff;
   color: #0071e3;
   box-shadow: 0 0 0 2px #0071e3;
-  border-radius: 50%;
+  border-radius: 16px;
+  width: 56px;
 }
 
 /* 收合狀態下 hover 維持藍色圓角方框 */
