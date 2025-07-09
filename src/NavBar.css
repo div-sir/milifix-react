@@ -116,19 +116,13 @@
   min-height: 56px;
   max-height: 56px;
   padding-left: 0;
+  padding-right: 0;
   gap: 0;
   justify-content: center;
   align-items: center;
   display: flex;
   line-height: 1;
-}
-
-.nav-float.collapsed .nav-icon {
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
+  border-radius: 16px;
 }
 
 .nav-float.collapsed .nav-item.active {
@@ -138,11 +132,21 @@
   justify-content: center;
   align-items: center;
   display: flex;
+  border-radius: 16px;
 }
 
 .nav-float.collapsed .nav-item:hover {
   background: rgba(0,113,227,0.08);
   box-shadow: 0 0 0 2px #0071e3;
+  border-radius: 16px;
+}
+
+.nav-float.collapsed .nav-icon {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 .nav-float.collapsed .nav-lang-btn {
