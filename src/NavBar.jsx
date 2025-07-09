@@ -3,6 +3,7 @@ import { Menu, Dropdown } from 'antd';
 import { HomeOutlined, RocketOutlined, PictureOutlined, ProjectOutlined, TeamOutlined, BookOutlined, GlobalOutlined } from '@ant-design/icons';
 import { LANGS } from './i18n';
 import { motion, AnimatePresence } from 'framer-motion';
+import './NavBar.css';
 
 const navItems = [
   { key: 'home', label: '首頁', path: '/', icon: <HomeOutlined /> },
@@ -44,114 +45,46 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
     <>
       {/* 收合時只顯示圓形按鈕，且展開時不顯示 */}
       {!expanded && !isTransitioning && (
-        <button
+        <motion.button
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          transition={{ duration: 0.3 }}
           onClick={() => setExpanded(true)}
-          style={{
-            position: 'fixed',
-            top: 32,
-            left: 32,
-            width: 48,
-            height: 48,
-            borderRadius: 24,
-            background: 'rgba(255,255,255,0.9)',
-            color: '#0071e3',
-            border: '2px solid #0071e3',
-            boxShadow: '0 2px 8px #0071e322',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            fontSize: 22,
-            zIndex: 201,
-            transition: 'background 0.2s, border 0.2s',
-          }}
+          className="nav-fab"
           title="展開側邊欄"
         >
           {'>'}
-        </button>
+        </motion.button>
       )}
       {/* 展開時顯示完整側邊欄 */}
       <AnimatePresence initial={false}>
         {expanded && !isTransitioning && (
           <motion.div
             key="nav-list"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -24 }}
-            transition={{ duration: 0.35 }}
-            style={{
-              position: 'fixed',
-              top: 32,
-              left: 32,
-              width: 200,
-              height: 480,
-              borderRadius: 24,
-              background: glassBg,
-              border: glassBorder,
-              boxShadow,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-              overflow: 'hidden',
-              padding: 0,
-              justifyContent: 'flex-start',
-              transition: 'box-shadow 0.2s',
-              zIndex: 200,
-              backdropFilter: `blur(${blur}px) saturate(1.5)`,
-              WebkitBackdropFilter: `blur(${blur}px) saturate(1.5)`
-            }}
+            initial={{ opacity: 0, scale: 0.92, y: 24 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.92, y: -24 }}
+            transition={{ duration: 0.35, ease: 'easeInOut' }}
+            className="nav-float"
           >
             <button
               onClick={() => setExpanded(false)}
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 20,
-                background: 'rgba(255,255,255,0.7)',
-                color: '#0071e3',
-                border: '2px solid #0071e3',
-                margin: '16px 0 12px 16px',
-                alignSelf: 'flex-start',
-                cursor: 'pointer',
-                fontSize: 20,
-                boxShadow: '0 2px 8px #0071e322',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'background 0.2s, border 0.2s',
-              }}
+              className="nav-close-btn"
               title="收合側邊欄"
             >
               {'<'}
             </button>
-            <div style={{ flex: 1, width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 8, padding: '0 0 0 8px' }}>
+            <div className="nav-list">
               {navItems.map(item => (
                 <div
                   key={item.key}
                   onClick={() => { handleTransition(); setTimeout(() => navigate(item.path), 400); }}
-                  style={{
-                    width: 180,
-                    height: 48,
-                    margin: '0 0',
-                    borderRadius: 16,
-                    background: active === item.key ? '#f2f2f7' : 'none',
-                    color: active === item.key ? '#0071e3' : '#222',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'flex-start',
-                    fontWeight: active === item.key ? 700 : 500,
-                    fontSize: 15,
-                    cursor: 'pointer',
-                    transition: 'background 0.2s, color 0.2s, width 0.3s',
-                    boxShadow: active === item.key ? '0 2px 8px #0071e322' : 'none',
-                    paddingLeft: 18,
-                    gap: 12,
-                  }}
+                  className={`nav-item${active === item.key ? ' active' : ''}`}
                   title={item.label}
                 >
-                  <span style={{ fontSize: 22, marginBottom: 2 }}>{item.icon}</span>
-                  <span style={{ fontSize: 15 }}>{item.label}</span>
+                  <span className="nav-icon">{item.icon}</span>
+                  <span className="nav-label">{item.label}</span>
                 </div>
               ))}
             </div>
@@ -172,7 +105,7 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
               }}
               placement="rightTop"
             >
-              <div style={{ width: 48, height: 48, borderRadius: 16, background: 'rgba(255,255,255,0.7)', color: '#0071e3', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '16px 0 24px 16px', cursor: 'pointer', fontSize: 22 }}>
+              <div className="nav-lang-btn">
                 <GlobalOutlined />
               </div>
             </Dropdown>
