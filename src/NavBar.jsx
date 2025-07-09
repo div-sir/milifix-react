@@ -20,98 +20,94 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const navigate = (path) => { window.location.href = path; };
 
+  // 滑鼠移入展開，移出收合
+  const handleMouseEnter = () => setExpanded(true);
+  const handleMouseLeave = () => setExpanded(false);
+
   // 動畫參數
-  const collapsed = !expanded || isTransitioning;
-  const width = collapsed ? 0 : 200;
-  const height = collapsed ? 0 : 480;
-  const borderRadius = collapsed ? 0 : 24;
   const blur = 18;
-  const glassBg = 'rgba(255,255,255,0.22)';
+  const glassBg = 'rgba(255,255,255,0.38)';
   const glassBorder = '1.5px solid rgba(255,255,255,0.28)';
   const boxShadow = '0 8px 32px 0 rgba(31,38,135,0.18)';
 
-  // 轉場動畫控制
-  function handleTransition() {
-    setIsTransitioning(true);
-    setTimeout(() => setIsTransitioning(false), 600);
-  }
-
-  // 監聽路徑變化自動收合動畫（修正只有首頁離開動畫成功的問題）
-  React.useEffect(() => {
-    setIsTransitioning(false);
-  }, [active]);
-
   return (
-    <>
-      {/* 收合時只顯示圓形按鈕，且展開時不顯示 */}
-      {!expanded && !isTransitioning && (
-        <motion.button
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          transition={{ duration: 0.3 }}
-          onClick={() => setExpanded(true)}
-          className="nav-fab"
-          title="展開側邊欄"
-        >
-          {'>'}
-        </motion.button>
-      )}
-      {/* 展開時顯示完整側邊欄 */}
-      <AnimatePresence initial={false}>
-        {expanded && !isTransitioning && (
-          <motion.div
-            key="nav-list"
-            initial={{ opacity: 0, scale: 0.92, y: 24 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.92, y: -24 }}
-            transition={{ duration: 0.35, ease: 'easeInOut' }}
-            className="nav-float"
+    <div
+      className="nav-float"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        position: 'fixed',
+        top: 32,
+        left: 32,
+        width: expanded ? 220 : 72,
+        height: 520,
+        borderRadius: 28,
+        background: glassBg,
+        border: glassBorder,
+        boxShadow,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        overflow: 'hidden',
+        padding: 0,
+        justifyContent: 'flex-start',
+        zIndex: 200,
+        backdropFilter: `blur(${blur}px) saturate(1.5)`,
+        WebkitBackdropFilter: `blur(${blur}px) saturate(1.5)`
+      }}
+    >
+      <div className="nav-list">
+        {navItems.map(item => (
+          <div
+            key={item.key}
+            onClick={() => navigate(item.path)}
+            className={`nav-item${active === item.key ? ' active' : ''}`}
+            title={item.label}
+            style={{
+              width: expanded ? 192 : 56,
+              height: 54,
+              borderRadius: 18,
+              background: active === item.key ? '#f2f2f7' : 'none',
+              color: active === item.key ? '#0071e3' : '#1a223a',
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+              fontWeight: active === item.key ? 700 : 500,
+              fontSize: 20,
+              cursor: 'pointer',
+              transition: 'background 0.2s, color 0.2s, width 0.3s',
+              boxShadow: active === item.key ? '0 2px 8px #0071e322' : 'none',
+              paddingLeft: expanded ? 22 : 8,
+              gap: expanded ? 16 : 0,
+            }}
           >
-            <button
-              onClick={() => setExpanded(false)}
-              className="nav-close-btn"
-              title="收合側邊欄"
-            >
-              {'<'}
-            </button>
-            <div className="nav-list">
-              {navItems.map(item => (
-                <div
-                  key={item.key}
-                  onClick={() => { handleTransition(); setTimeout(() => navigate(item.path), 400); }}
-                  className={`nav-item${active === item.key ? ' active' : ''}`}
-                  title={item.label}
-                >
-                  <span className="nav-icon">{item.icon}</span>
-                  <span className="nav-label">{item.label}</span>
-                </div>
-              ))}
-            </div>
-            <div style={{ height: 24 }} />
-            <Dropdown
-              open={langOpen}
-              onOpenChange={setLangOpen}
-              menu={{
-                items: LANGS.map(opt => ({
-                  key: opt.key,
-                  label: (
-                    <span
-                      style={{ padding: '8px 18px', display: 'block', color: lang === opt.key ? '#0071e3' : '#222', fontWeight: lang === opt.key ? 700 : 400 }}
-                      onClick={() => { setLangOpen(false); onLangChange && onLangChange(opt.key); }}
-                    >{opt.label}</span>
-                  )
-                }))
-              }}
-              placement="rightTop"
-            >
-              <div className="nav-lang-btn">
-                <GlobalOutlined />
-              </div>
-            </Dropdown>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+            <span className="nav-icon" style={{ fontSize: expanded ? 26 : 22 }}>{item.icon}</span>
+            {expanded && <span className="nav-label">{item.label}</span>}
+          </div>
+        ))}
+      </div>
+      <div style={{ height: 24 }} />
+      <Dropdown
+        open={langOpen}
+        onOpenChange={setLangOpen}
+        menu={{
+          items: LANGS.map(opt => ({
+            key: opt.key,
+            label: (
+              <span
+                style={{ padding: '8px 18px', display: 'block', color: lang === opt.key ? '#0071e3' : '#222', fontWeight: lang === opt.key ? 700 : 400 }}
+                onClick={() => { setLangOpen(false); onLangChange && onLangChange(opt.key); }}
+              >{opt.label}</span>
+            )
+          }))
+        }}
+        placement="rightTop"
+      >
+        <div className="nav-lang-btn" style={{ marginLeft: expanded ? 18 : 8, width: expanded ? 52 : 40, height: expanded ? 52 : 40, fontSize: expanded ? 26 : 20 }}>
+          <GlobalOutlined />
+        </div>
+      </Dropdown>
+    </div>
   );
 } 
