@@ -42,8 +42,8 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
 
   return (
     <>
-      {/* 收合時只顯示圓形按鈕 */}
-      {collapsed && (
+      {/* 收合時只顯示圓形按鈕，且展開時不顯示 */}
+      {!expanded && !isTransitioning && (
         <button
           onClick={() => setExpanded(true)}
           style={{
