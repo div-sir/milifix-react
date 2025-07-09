@@ -129,7 +129,15 @@
   box-shadow: none;
 }
 
-.nav-float.collapsed .nav-item.active,
+/* 收合狀態下 active 為白底圓形藍色描邊 */
+.nav-float.collapsed .nav-item.active {
+  background: #fff;
+  color: #0071e3;
+  box-shadow: 0 0 0 2px #0071e3;
+  border-radius: 50%;
+}
+
+/* 收合狀態下 hover 維持藍色圓角方框 */
 .nav-float.collapsed .nav-item:hover {
   background: rgba(0,113,227,0.08);
   color: #0071e3;
@@ -151,11 +159,12 @@
   color: #1a223a;
 }
 
+/* 收合狀態下語言地球按鈕與上方 icon 對齊 */
 .nav-float.collapsed .nav-lang-btn {
   margin-left: 0;
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
+  width: 56px;
+  height: 56px;
+  font-size: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
