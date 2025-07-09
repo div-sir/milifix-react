@@ -25,11 +25,11 @@ const story = {
 
 function App() {
   const path = window.location.pathname;
-  if (path === '/story') return <Story />;
-  if (path === '/tech') return <Tech />;
-  if (path === '/art') return <Art />;
-  if (path === '/project') return <Project />;
-  if (path === '/team') return <Team />;
+  if (path.startsWith('/story')) return <Story />;
+  if (path.startsWith('/tech')) return <Tech />;
+  if (path.startsWith('/art')) return <Art />;
+  if (path.startsWith('/project')) return <Project />;
+  if (path.startsWith('/team')) return <Team />;
 
   return (
     <ConfigProvider
