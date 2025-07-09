@@ -101,7 +101,7 @@ function App() {
           </motion.div>
         </AnimatePresence>
         {/* 全站唯一 Footer */}
-        <footer style={{ color: '#888', textAlign: 'center', width: '100%', padding: '32px 0 24px 0', fontSize: 18, borderTop: '1px solid #222', marginTop: 48, background: 'rgba(20,28,44,0.92)', position: 'relative', zIndex: 10, letterSpacing: '0.04em' }}>
+        <footer style={{ color: '#888', textAlign: 'center', width: '100%', padding: '32px 0 24px 0', fontSize: 18, borderTop: '1px solid #222', marginTop: 48, background: 'rgba(20,28,44,0.92)', position: 'relative', zIndex: 10, letterSpacing: '0.04em', boxShadow: 'none' }}>
           &copy; 2024 MILIFIX 集團 | Unlock the Extraordinary<br/>
           聯絡信箱：info@milifix.org ｜ 地址：台北市信義區未來路88號 ｜ 服務專線：02-1234-5678<br/>
           <span style={{ color: '#bbb', fontSize: 15 }}>本網站僅供展示，所有資料僅供參考，未經授權請勿轉載。</span>
