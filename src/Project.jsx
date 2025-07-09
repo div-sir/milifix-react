@@ -4,18 +4,8 @@ import NavBar from './NavBar';
 
 const { Title, Paragraph } = Typography;
 
-const project = {
-  title: '專案',
-  intro: 'MILIFIX 匯聚跨界專案，從科技到藝術，推動創新與合作，實現多元願景。',
-  timeline: [
-    { year: '2020', event: '啟動「未來城市」專案，結合 IoT 與 AI 打造智慧社區。' },
-    { year: '2021', event: '「藝術＋科技」聯合展演，促進產學合作。' },
-    { year: '2023', event: '國際合作專案啟動，拓展全球影響力。' }
-  ],
-  vision: '我們相信，專案是實現夢想的起點，MILIFIX 將持續推動創新專案，連結世界。'
-};
-
-export default function Project() {
+export default function Project({ lang = 'zh', i18n }) {
+  const project = i18n.project;
   return (
     <ConfigProvider
       theme={{
@@ -26,20 +16,13 @@ export default function Project() {
       }}
     >
       <div style={{ minHeight: '100vh' }}>
-        <NavBar active="project" />
+        <NavBar active="project" lang={lang} />
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh', padding: '2vw', flexWrap: 'wrap', gap: 32 }}>
-          {[0,1,2].map(idx => (
+          {project.list && project.list.map((item, idx) => (
             <div key={idx} style={{ borderRadius: 24, boxShadow: '0 4px 24px 0 #0001', padding: 36, maxWidth: 700, width: 340, margin: '24px 0', background: 'rgba(255,255,255,0.85)' }}>
-              <Title level={2} style={{ color: '#222', textAlign: 'center', fontFamily: 'Orbitron, Arial, sans-serif' }}>{project.title} 卡片 {idx+1}</Title>
-              <Paragraph strong style={{ color: '#333', textAlign: 'center' }}>{project.intro}</Paragraph>
-              <ul style={{ color: '#0071e3', margin: '2em 0', paddingLeft: 0, listStyle: 'none' }}>
-                {project.timeline.map(item => (
-                  <li key={item.year} style={{ marginBottom: 12 }}>
-                    <span style={{ fontWeight: 700 }}>{item.year}</span> {item.event}
-                  </li>
-                ))}
-              </ul>
-              <Paragraph italic style={{ color: '#0071e3', textAlign: 'center' }}>{project.vision}</Paragraph>
+              <Title level={2} style={{ color: '#222', textAlign: 'center', fontFamily: 'Orbitron, Arial, sans-serif' }}>{item.name}</Title>
+              <Paragraph strong style={{ color: '#333', textAlign: 'center' }}>{item.desc}</Paragraph>
+              <div><img src={item.img} alt={item.name} style={{ width: '100%', maxWidth: 300, borderRadius: 8, margin: '12px auto' }} /></div>
             </div>
           ))}
         </div>

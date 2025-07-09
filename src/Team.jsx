@@ -4,18 +4,8 @@ import NavBar from './NavBar';
 
 const { Title, Paragraph } = Typography;
 
-const team = {
-  title: '人員介紹',
-  intro: 'MILIFIX 匯聚來自科技、藝術、設計等領域的頂尖人才，攜手共創未來。',
-  timeline: [
-    { year: '2018', event: '核心團隊成立，聚集多元專業背景成員。' },
-    { year: '2020', event: '擴大國際合作，吸引全球優秀人才加入。' },
-    { year: '2023', event: '推動跨界人才培育計畫，促進知識交流。' }
-  ],
-  vision: '我們相信，人才是最珍貴的資產，MILIFIX 將持續培育與吸引優秀夥伴，共同實現願景。'
-};
-
-export default function Team() {
+export default function Team({ lang = 'zh', i18n }) {
+  const team = i18n.team;
   return (
     <ConfigProvider
       theme={{
@@ -26,20 +16,14 @@ export default function Team() {
       }}
     >
       <div style={{ minHeight: '100vh' }}>
-        <NavBar active="team" />
+        <NavBar active="team" lang={lang} />
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh', padding: '2vw', flexWrap: 'wrap', gap: 32 }}>
-          {[0,1,2].map(idx => (
+          {team.members && team.members.map((member, idx) => (
             <div key={idx} style={{ borderRadius: 24, boxShadow: '0 4px 24px 0 #0001', padding: 36, maxWidth: 700, width: 340, margin: '24px 0', background: 'rgba(255,255,255,0.85)' }}>
-              <Title level={2} style={{ color: '#222', textAlign: 'center', fontFamily: 'Orbitron, Arial, sans-serif' }}>{team.title} 卡片 {idx+1}</Title>
-              <Paragraph strong style={{ color: '#333', textAlign: 'center' }}>{team.intro}</Paragraph>
-              <ul style={{ color: '#0071e3', margin: '2em 0', paddingLeft: 0, listStyle: 'none' }}>
-                {team.timeline.map(item => (
-                  <li key={item.year} style={{ marginBottom: 12 }}>
-                    <span style={{ fontWeight: 700 }}>{item.year}</span> {item.event}
-                  </li>
-                ))}
-              </ul>
-              <Paragraph italic style={{ color: '#0071e3', textAlign: 'center' }}>{team.vision}</Paragraph>
+              <Title level={2} style={{ color: '#222', textAlign: 'center', fontFamily: 'Orbitron, Arial, sans-serif' }}>{member.name}</Title>
+              <Paragraph strong style={{ color: '#333', textAlign: 'center' }}>{member.role}</Paragraph>
+              <Paragraph style={{ color: '#555', textAlign: 'center' }}>{member.desc}</Paragraph>
+              <div><img src={member.img} alt={member.name} style={{ width: 120, height: 120, borderRadius: '50%', margin: '12px auto' }} /></div>
             </div>
           ))}
         </div>

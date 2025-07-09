@@ -10,6 +10,7 @@ import Team from './Team';
 import Particles from './Particles';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
+import { getI18n, LANGS } from './i18n';
 
 const { Header, Content, Footer } = Layout;
 const { Title, Paragraph } = Typography;
@@ -56,20 +57,13 @@ function getPageKey(path) {
   return 'home';
 }
 
-function getPageNode(path) {
-  if (path.startsWith('/story')) return <Story />;
-  if (path.startsWith('/tech')) return <Tech />;
-  if (path.startsWith('/art')) return <Art />;
-  if (path.startsWith('/project')) return <Project />;
-  if (path.startsWith('/team')) return <Team />;
-  return pageMap['/'].node;
-}
-
 function App() {
   const [location, setLocation] = useState(window.location.pathname);
+  const [lang, setLang] = useState('zh');
   window.onpopstate = () => setLocation(window.location.pathname);
   const pageKey = getPageKey(location);
-  const pageNode = getPageNode(location);
+  const i18n = getI18n(lang);
+  const pageNode = getPageNode(location, lang, i18n);
 
   return (
     <ConfigProvider
@@ -82,10 +76,21 @@ function App() {
     >
       <div style={{ minHeight: '100vh' }}>
         <Particles />
-        <NavBar active={pageKey} />
         <AnimatePresence mode="wait">
           <motion.div
-            key={pageKey}
+            key={"navbar-" + pageKey + lang}
+            initial={{ opacity: 0, x: -32 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -32 }}
+            transition={{ duration: 0.35, ease: 'easeInOut' }}
+            style={{ position: 'fixed', top: 0, left: 0, zIndex: 200 }}
+          >
+            <NavBar active={pageKey} lang={lang} onLangChange={setLang} />
+          </motion.div>
+        </AnimatePresence>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={pageKey + '-' + lang}
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -32 }}
@@ -103,6 +108,15 @@ function App() {
       </div>
     </ConfigProvider>
   );
+}
+
+function getPageNode(path, lang, i18n) {
+  if (path.startsWith('/story')) return <Story lang={lang} i18n={i18n} />;
+  if (path.startsWith('/tech')) return <Tech lang={lang} i18n={i18n} />;
+  if (path.startsWith('/art')) return <Art lang={lang} i18n={i18n} />;
+  if (path.startsWith('/project')) return <Project lang={lang} i18n={i18n} />;
+  if (path.startsWith('/team')) return <Team lang={lang} i18n={i18n} />;
+  return pageMap['/'].node;
 }
 
 export default App;
