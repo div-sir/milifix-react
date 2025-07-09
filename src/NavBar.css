@@ -153,12 +153,11 @@
 }
 
 .nav-float.collapsed .nav-icon {
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0;
-  font-size: 22px;
-  color: #1a223a;
 }
 
 /* 收合狀態下語言地球按鈕與上方 icon 對齊 */
