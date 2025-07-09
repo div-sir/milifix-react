@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Menu, Dropdown } from 'antd';
+import { HomeOutlined, RocketOutlined, PictureOutlined, ProjectOutlined, TeamOutlined, BookOutlined, GlobalOutlined } from '@ant-design/icons';
 
 const navItems = [
-  { key: 'home', label: '首頁', path: '/' },
-  { key: 'tech', label: '科技', path: '/tech' },
-  { key: 'art', label: '藝術', path: '/art' },
-  { key: 'project', label: '專案', path: '/project' },
-  { key: 'team', label: '人員介紹', path: '/team' },
-  { key: 'story', label: '品牌故事', path: '/story' },
+  { key: 'home', label: '首頁', path: '/', icon: <HomeOutlined /> },
+  { key: 'tech', label: '科技', path: '/tech', icon: <RocketOutlined /> },
+  { key: 'art', label: '藝術', path: '/art', icon: <PictureOutlined /> },
+  { key: 'project', label: '專案', path: '/project', icon: <ProjectOutlined /> },
+  { key: 'team', label: '人員介紹', path: '/team', icon: <TeamOutlined /> },
+  { key: 'story', label: '品牌故事', path: '/story', icon: <BookOutlined /> },
 ];
 
 const langOptions = [
@@ -20,53 +21,54 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
   const [langOpen, setLangOpen] = useState(false);
   const navigate = (path) => { window.location.href = path; };
   return (
-    <div
+    <aside
       style={{
         position: 'fixed',
-        top: 32,
-        right: 32,
+        top: 0,
+        left: 0,
+        height: '100vh',
+        width: 72,
+        background: 'rgba(255,255,255,0.92)',
+        boxShadow: '2px 0 16px 0 #0001',
         zIndex: 200,
-        background: '#fff',
-        borderRadius: 24,
-        boxShadow: '0 4px 24px 0 #0001',
-        padding: '0 16px',
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
-        minHeight: 56,
-        minWidth: 320,
+        padding: '24px 0 0 0',
+        borderTopRightRadius: 24,
+        borderBottomRightRadius: 24,
         gap: 8,
       }}
     >
-      <Menu
-        mode="horizontal"
-        selectedKeys={[active]}
-        items={navItems.map(item => ({
-          key: item.key,
-          label: (
-            <span
-              onClick={() => navigate(item.path)}
-              style={{
-                padding: '0 16px',
-                fontWeight: 500,
-                fontSize: 16,
-                color: active === item.key ? '#111' : '#555',
-                borderRadius: 12,
-                background: active === item.key ? '#f2f2f7' : 'none',
-                transition: 'background 0.2s, color 0.2s',
-                cursor: 'pointer',
-                display: 'inline-block',
-              }}
-              onMouseEnter={e => {
-                e.target.style.background = '#f2f2f7';
-              }}
-              onMouseLeave={e => {
-                e.target.style.background = active === item.key ? '#f2f2f7' : 'none';
-              }}
-            >{item.label}</span>
-          )
-        }))}
-        style={{ background: 'none', borderBottom: 'none', flex: 1, minWidth: 0, justifyContent: 'flex-end' }}
-      />
+      <div style={{ flex: 1, width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+        {navItems.map(item => (
+          <div
+            key={item.key}
+            onClick={() => navigate(item.path)}
+            style={{
+              width: 56,
+              height: 56,
+              margin: '0 auto',
+              borderRadius: 16,
+              background: active === item.key ? '#f2f2f7' : 'none',
+              color: active === item.key ? '#0071e3' : '#222',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 500,
+              fontSize: 13,
+              cursor: 'pointer',
+              transition: 'background 0.2s, color 0.2s',
+              boxShadow: active === item.key ? '0 2px 8px #0071e322' : 'none',
+            }}
+            title={item.label}
+          >
+            <span style={{ fontSize: 22, marginBottom: 2 }}>{item.icon}</span>
+            <span style={{ fontSize: 12 }}>{item.label}</span>
+          </div>
+        ))}
+      </div>
       <Dropdown
         open={langOpen}
         onOpenChange={setLangOpen}
@@ -81,21 +83,12 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
             )
           }))
         }}
+        placement="rightTop"
       >
-        <div
-          className="lang-selected"
-          style={{
-            background: '#f2f2f7', color: '#222', padding: '6px 18px 6px 12px', borderRadius: 12,
-            fontSize: 16, display: 'flex', alignItems: 'center', marginLeft: 8,
-            cursor: 'pointer', userSelect: 'none', transition: 'background 0.2s',
-            fontWeight: 500
-          }}
-          onClick={() => setLangOpen(!langOpen)}
-        >
-          <span className="globe" style={{ fontSize: 20, marginRight: 6 }}>🌐</span>
-          {langOptions.find(opt => opt.key === lang)?.label || '繁體中文'}
+        <div style={{ width: 56, height: 56, borderRadius: 16, background: '#f2f2f7', color: '#0071e3', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px auto', cursor: 'pointer', fontSize: 22 }}>
+          <GlobalOutlined />
         </div>
       </Dropdown>
-    </div>
+    </aside>
   );
 } 

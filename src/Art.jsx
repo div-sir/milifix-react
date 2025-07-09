@@ -27,19 +27,21 @@ export default function Art() {
     >
       <div style={{ minHeight: '100vh' }}>
         <NavBar active="art" />
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh', padding: '2vw' }}>
-          <div style={{ borderRadius: 24, boxShadow: '0 4px 24px 0 #0001', padding: 36, maxWidth: 700, width: '100%', margin: '48px 0', background: 'rgba(255,255,255,0.85)' }}>
-            <Title level={1} style={{ color: '#222', textAlign: 'center', fontFamily: 'Orbitron, Arial, sans-serif' }}>{art.title}</Title>
-            <Paragraph strong style={{ color: '#333', textAlign: 'center' }}>{art.intro}</Paragraph>
-            <ul style={{ color: '#0071e3', margin: '2em 0', paddingLeft: 0, listStyle: 'none' }}>
-              {art.timeline.map(item => (
-                <li key={item.year} style={{ marginBottom: 12 }}>
-                  <span style={{ fontWeight: 700 }}>{item.year}</span> {item.event}
-                </li>
-              ))}
-            </ul>
-            <Paragraph italic style={{ color: '#0071e3', textAlign: 'center' }}>{art.vision}</Paragraph>
-          </div>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh', padding: '2vw', flexWrap: 'wrap', gap: 32 }}>
+          {[0,1,2].map(idx => (
+            <div key={idx} style={{ borderRadius: 24, boxShadow: '0 4px 24px 0 #0001', padding: 36, maxWidth: 700, width: 340, margin: '24px 0', background: 'rgba(255,255,255,0.85)' }}>
+              <Title level={2} style={{ color: '#222', textAlign: 'center', fontFamily: 'Orbitron, Arial, sans-serif' }}>{art.title} 卡片 {idx+1}</Title>
+              <Paragraph strong style={{ color: '#333', textAlign: 'center' }}>{art.intro}</Paragraph>
+              <ul style={{ color: '#0071e3', margin: '2em 0', paddingLeft: 0, listStyle: 'none' }}>
+                {art.timeline.map(item => (
+                  <li key={item.year} style={{ marginBottom: 12 }}>
+                    <span style={{ fontWeight: 700 }}>{item.year}</span> {item.event}
+                  </li>
+                ))}
+              </ul>
+              <Paragraph italic style={{ color: '#0071e3', textAlign: 'center' }}>{art.vision}</Paragraph>
+            </div>
+          ))}
         </div>
         <div style={{ color: '#888', textAlign: 'center', width: '100%', padding: '24px 0', fontSize: 16, borderTop: '1px solid #eee', marginTop: 48, background: 'rgba(255,255,255,0.7)' }}>
           &copy; 2024 MILIFIX 集團 | Unlock the Extraordinary<br/>
