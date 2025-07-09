@@ -104,6 +104,8 @@ function App() {
             />
           </motion.div>
         </AnimatePresence>
+        {/* debug: 直接顯示 test 文字在 AnimatePresence 外層，排除動畫包裹問題 */}
+        <div>test</div>
         <AnimatePresence mode="wait">
           <motion.div
             key={pageKey + '-' + lang}
@@ -113,8 +115,7 @@ function App() {
             transition={{ duration: 0.45, ease: 'easeInOut' }}
             style={{ minHeight: '100vh', marginLeft: 72 }}
           >
-            {/* debug: 先顯示 test 文字，排除 pageNode 組件錯誤 */}
-            <div>test</div>
+            {/* 這裡暫時不顯示內容 */}
           </motion.div>
         </AnimatePresence>
         {/* 全站唯一 Footer */}
