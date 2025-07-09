@@ -21,9 +21,9 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
 
   // 動畫參數
   const collapsed = !expanded || isTransitioning;
-  const width = collapsed ? 320 : 200;
+  const width = collapsed ? 64 : 200;
   const height = collapsed ? 64 : 480;
-  const borderRadius = collapsed ? 48 : 24;
+  const borderRadius = collapsed ? 32 : 24;
   const blur = 18;
   const glassBg = 'rgba(255,255,255,0.22)';
   const glassBorder = '1.5px solid rgba(255,255,255,0.28)';
@@ -35,8 +35,10 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
     setTimeout(() => setIsTransitioning(false), 600);
   }
 
-  // 監聽父層頁面切換時的動畫（可由 props 傳入或 context 實現，這裡簡單用 setTimeout 模擬）
-  // 實際可由 App.jsx 傳入 isPageTransitioning 來精準控制
+  // 監聽路徑變化自動收合動畫（修正只有首頁離開動畫成功的問題）
+  React.useEffect(() => {
+    setIsTransitioning(false);
+  }, [active]);
 
   return (
     <motion.div
@@ -110,12 +112,12 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
                     margin: '0 0',
                     borderRadius: 16,
                     background: active === item.key ? '#f2f2f7' : 'none',
-                    color: active === item.key ? '#0071e3' : '#222',
+                    color: '#0071e3',
                     display: 'flex',
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'flex-start',
-                    fontWeight: 500,
+                    fontWeight: active === item.key ? 700 : 500,
                     fontSize: 15,
                     cursor: 'pointer',
                     transition: 'background 0.2s, color 0.2s, width 0.3s',
@@ -152,18 +154,7 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
               </div>
             </Dropdown>
           </motion.div>
-        ) : collapsed && (
-          <motion.div
-            key="nav-ellipse"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.4 }}
-            style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-          >
-            {/* 只顯示橢圓條與 > 按鈕，內容完全隱藏 */}
-          </motion.div>
-        )}
+        ) : null}
       </AnimatePresence>
     </motion.div>
   );
