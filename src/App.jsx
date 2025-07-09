@@ -113,7 +113,8 @@ function App() {
             transition={{ duration: 0.45, ease: 'easeInOut' }}
             style={{ minHeight: '100vh', marginLeft: 72 }}
           >
-            {pageNode}
+            {/* debug: 先顯示 test 文字，排除 pageNode 組件錯誤 */}
+            <div>test</div>
           </motion.div>
         </AnimatePresence>
         {/* 全站唯一 Footer */}
