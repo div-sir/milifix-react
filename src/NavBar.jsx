@@ -71,15 +71,19 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
         style={{
           width: 40,
           height: 40,
-          borderRadius: 12,
-          background: '#f2f2f7',
+          borderRadius: 20,
+          background: 'rgba(255,255,255,0.7)',
           color: '#0071e3',
-          border: 'none',
+          border: '2px solid #0071e3',
           margin: '16px 0 12px 16px',
           alignSelf: 'flex-start',
           cursor: 'pointer',
           fontSize: 20,
-          transition: 'background 0.2s',
+          boxShadow: '0 2px 8px #0071e322',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          transition: 'background 0.2s, border 0.2s',
         }}
         title={expanded ? '收合側邊欄' : '展開側邊欄'}
       >
@@ -126,6 +130,7 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
                 </div>
               ))}
             </div>
+            <div style={{ height: 24 }} />
             <Dropdown
               open={langOpen}
               onOpenChange={setLangOpen}
@@ -142,9 +147,8 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
               }}
               placement="rightTop"
             >
-              <div style={{ width: 180, height: 48, borderRadius: 16, background: '#f2f2f7', color: '#0071e3', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', margin: '0 0 24px 0', cursor: 'pointer', fontSize: 22, paddingLeft: 18, gap: 12 }}>
+              <div style={{ width: 48, height: 48, borderRadius: 16, background: 'rgba(255,255,255,0.7)', color: '#0071e3', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '16px 0 24px 16px', cursor: 'pointer', fontSize: 22 }}>
                 <GlobalOutlined />
-                <span style={{ fontSize: 15 }}>{LANGS.find(l => l.key === lang)?.label || '語言'}</span>
               </div>
             </Dropdown>
           </motion.div>
