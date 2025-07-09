@@ -26,7 +26,7 @@ export default function Story({ lang = 'zh', i18n }) {
       }}
     >
       <div style={{ minHeight: '100vh' }}>
-        <NavBar active="story" lang={lang} />
+        {/* NavBar 移除，統一由 App.jsx 控制 */}
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh', padding: '2vw' }}>
           <div style={{ borderRadius: 24, boxShadow: '0 4px 24px 0 #0001', padding: 36, maxWidth: 700, width: '100%', margin: '48px 0', background: 'rgba(255,255,255,0.85)' }}>
             <Title level={1} style={{ color: '#222', textAlign: 'center', fontFamily: 'Orbitron, Arial, sans-serif' }}>{story.title}</Title>

@@ -14,15 +14,11 @@ const navItems = [
   { key: 'story', label: '品牌故事', path: '/story', icon: <BookOutlined /> },
 ];
 
-export default function NavBar({ active, onLangChange, lang = 'zh', expanded, setExpanded, isTransitioning, onNavTransition }) {
-  const [langOpen, setLangOpen] = React.useState(false);
+export default function NavBar({ active, onLangChange, lang = 'zh' }) {
+  const [langOpen, setLangOpen] = useState(false);
+  const [expanded, setExpanded] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const navigate = (path) => { window.location.href = path; };
-
-  // 點擊選單時觸發動畫
-  function handleNavItemClick(path) {
-    if (onNavTransition) onNavTransition();
-    setTimeout(() => navigate(path), 400);
-  }
 
   // 動畫參數
   const collapsed = !expanded || isTransitioning;
@@ -83,7 +79,7 @@ export default function NavBar({ active, onLangChange, lang = 'zh', expanded, se
               {navItems.map(item => (
                 <div
                   key={item.key}
-                  onClick={() => handleNavItemClick(item.path)}
+                  onClick={() => { handleTransition(); setTimeout(() => navigate(item.path), 400); }}
                   className={`nav-item${active === item.key ? ' active' : ''}`}
                   title={item.label}
                 >

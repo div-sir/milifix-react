@@ -16,7 +16,7 @@ export default function Team({ lang = 'zh', i18n }) {
       }}
     >
       <div style={{ minHeight: '100vh' }}>
-        <NavBar active="team" lang={lang} />
+        {/* NavBar 移除，統一由 App.jsx 控制 */}
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh', padding: '2vw', flexWrap: 'wrap', gap: 32 }}>
           {team.members && team.members.map((member, idx) => (
             <div key={idx} style={{ borderRadius: 24, boxShadow: '0 4px 24px 0 #0001', padding: 36, maxWidth: 700, width: 340, margin: '24px 0', background: 'rgba(255,255,255,0.85)' }}>
