@@ -32,7 +32,7 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
 
   return (
     <div
-      className="nav-float"
+      className={`nav-float${expanded ? '' : ' collapsed'}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{

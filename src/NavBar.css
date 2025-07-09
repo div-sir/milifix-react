@@ -39,7 +39,7 @@
   z-index: 200;
   backdrop-filter: blur(18px) saturate(1.5);
   -webkit-backdrop-filter: blur(18px) saturate(1.5);
-  transition: box-shadow 0.2s;
+  transition: width 0.38s cubic-bezier(0.4,0.2,0.2,1), background 0.2s, box-shadow 0.2s;
 }
 
 .nav-close-btn {
@@ -68,6 +68,7 @@
   align-items: flex-start;
   gap: 12px;
   padding: 0 0 0 12px;
+  transition: gap 0.38s cubic-bezier(0.4,0.2,0.2,1), padding 0.38s cubic-bezier(0.4,0.2,0.2,1);
 }
 
 .nav-item {
@@ -84,10 +85,11 @@
   font-weight: 500;
   font-size: 20px;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, width 0.3s;
+  transition: background 0.22s, color 0.22s, width 0.38s cubic-bezier(0.4,0.2,0.2,1), padding 0.38s cubic-bezier(0.4,0.2,0.2,1), gap 0.38s cubic-bezier(0.4,0.2,0.2,1);
   box-shadow: none;
   padding-left: 22px;
   gap: 16px;
+  position: relative;
 }
 
 .nav-item.active {
@@ -97,14 +99,42 @@
   box-shadow: 0 2px 8px #0071e322;
 }
 
+.nav-item:hover {
+  background: rgba(0,113,227,0.08);
+  box-shadow: 0 0 0 2px #0071e3;
+}
+
+.nav-float.collapsed .nav-item {
+  width: 56px;
+  padding-left: 8px;
+  gap: 0;
+  justify-content: center;
+}
+
+.nav-float.collapsed .nav-item.active {
+  background: #f2f2f7;
+  color: #0071e3;
+  box-shadow: 0 2px 8px #0071e322;
+  justify-content: center;
+}
+
 .nav-icon {
   font-size: 26px;
   margin-bottom: 2px;
+  transition: font-size 0.38s cubic-bezier(0.4,0.2,0.2,1);
 }
 
 .nav-label {
   font-size: 20px;
-  color: #1a223a;
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.38s cubic-bezier(0.4,0.2,0.2,1), transform 0.38s cubic-bezier(0.4,0.2,0.2,1);
+}
+
+.nav-float.collapsed .nav-label {
+  opacity: 0;
+  transform: translateX(16px);
+  pointer-events: none;
 }
 
 .nav-lang-btn {
@@ -112,7 +142,7 @@
   height: 52px;
   border-radius: 18px;
   background: transparent;
-  color: #0071e3;
+  color: #1a223a;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -121,7 +151,14 @@
   font-size: 26px;
   border: none;
   box-shadow: none;
-  transition: background 0.2s;
+  transition: background 0.2s, color 0.2s, width 0.38s cubic-bezier(0.4,0.2,0.2,1), height 0.38s cubic-bezier(0.4,0.2,0.2,1), font-size 0.38s cubic-bezier(0.4,0.2,0.2,1), margin 0.38s cubic-bezier(0.4,0.2,0.2,1);
+}
+
+.nav-float.collapsed .nav-lang-btn {
+  margin-left: 8px;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
 }
 
 @media (max-width: 700px) {
