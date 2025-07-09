@@ -7,6 +7,7 @@ import Tech from './Tech';
 import Art from './Art';
 import Project from './Project';
 import Team from './Team';
+import Particles from './Particles';
 //import { Fireflies } from 'react-bits';
 
 const { Header, Content, Footer } = Layout;
@@ -25,11 +26,11 @@ const story = {
 
 function App() {
   const path = window.location.pathname;
-  if (path.startsWith('/story')) return <Story />;
-  if (path.startsWith('/tech')) return <Tech />;
-  if (path.startsWith('/art')) return <Art />;
-  if (path.startsWith('/project')) return <Project />;
-  if (path.startsWith('/team')) return <Team />;
+  if (path.startsWith('/story')) return <><Particles /><Story /></>;
+  if (path.startsWith('/tech')) return <><Particles /><Tech /></>;
+  if (path.startsWith('/art')) return <><Particles /><Art /></>;
+  if (path.startsWith('/project')) return <><Particles /><Project /></>;
+  if (path.startsWith('/team')) return <><Particles /><Team /></>;
 
   return (
     <ConfigProvider
@@ -41,6 +42,7 @@ function App() {
       }}
     >
       <div style={{ minHeight: '100vh', background: '#fff' }}>
+        <Particles />
         <NavBar active="home" />
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh', padding: '2vw' }}>
           <div style={{ background: '#fff', borderRadius: 24, boxShadow: '0 4px 24px 0 #0001', padding: 36, maxWidth: 700, width: '100%', margin: '48px 0' }}>
