@@ -21,9 +21,9 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
 
   // 動畫參數
   const collapsed = !expanded || isTransitioning;
-  const width = collapsed ? 64 : 200;
-  const height = collapsed ? 64 : 480;
-  const borderRadius = collapsed ? 32 : 24;
+  const width = collapsed ? 0 : 200;
+  const height = collapsed ? 0 : 480;
+  const borderRadius = collapsed ? 0 : 24;
   const blur = 18;
   const glassBg = 'rgba(255,255,255,0.22)';
   const glassBorder = '1.5px solid rgba(255,255,255,0.28)';
@@ -41,66 +41,89 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
   }, [active]);
 
   return (
-    <motion.div
-      initial={false}
-      animate={{
-        width,
-        height,
-        borderRadius,
-        backdropFilter: `blur(${blur}px) saturate(1.5)`,
-        WebkitBackdropFilter: `blur(${blur}px) saturate(1.5)`
-      }}
-      transition={{ duration: 0.5, type: 'spring', bounce: 0.18 }}
-      style={{
-        position: 'fixed',
-        top: 32,
-        left: 32,
-        zIndex: 200,
-        background: glassBg,
-        border: glassBorder,
-        boxShadow,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        overflow: 'hidden',
-        padding: 0,
-        justifyContent: 'flex-start',
-        transition: 'box-shadow 0.2s',
-      }}
-    >
-      <button
-        onClick={() => setExpanded(e => !e)}
-        style={{
-          width: 40,
-          height: 40,
-          borderRadius: 20,
-          background: 'rgba(255,255,255,0.7)',
-          color: '#0071e3',
-          border: '2px solid #0071e3',
-          margin: '16px 0 12px 16px',
-          alignSelf: 'flex-start',
-          cursor: 'pointer',
-          fontSize: 20,
-          boxShadow: '0 2px 8px #0071e322',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          transition: 'background 0.2s, border 0.2s',
-        }}
-        title={expanded ? '收合側邊欄' : '展開側邊欄'}
-      >
-        {expanded ? '<' : '>'}
-      </button>
+    <>
+      {/* 收合時只顯示圓形按鈕 */}
+      {collapsed && (
+        <button
+          onClick={() => setExpanded(true)}
+          style={{
+            position: 'fixed',
+            top: 32,
+            left: 32,
+            width: 48,
+            height: 48,
+            borderRadius: 24,
+            background: 'rgba(255,255,255,0.9)',
+            color: '#0071e3',
+            border: '2px solid #0071e3',
+            boxShadow: '0 2px 8px #0071e322',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            fontSize: 22,
+            zIndex: 201,
+            transition: 'background 0.2s, border 0.2s',
+          }}
+          title="展開側邊欄"
+        >
+          {'>'}
+        </button>
+      )}
+      {/* 展開時顯示完整側邊欄 */}
       <AnimatePresence initial={false}>
-        {expanded && !isTransitioning ? (
+        {expanded && !isTransitioning && (
           <motion.div
             key="nav-list"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -24 }}
             transition={{ duration: 0.35 }}
-            style={{ width: '100%' }}
+            style={{
+              position: 'fixed',
+              top: 32,
+              left: 32,
+              width: 200,
+              height: 480,
+              borderRadius: 24,
+              background: glassBg,
+              border: glassBorder,
+              boxShadow,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              overflow: 'hidden',
+              padding: 0,
+              justifyContent: 'flex-start',
+              transition: 'box-shadow 0.2s',
+              zIndex: 200,
+              backdropFilter: `blur(${blur}px) saturate(1.5)`,
+              WebkitBackdropFilter: `blur(${blur}px) saturate(1.5)`
+            }}
           >
+            <button
+              onClick={() => setExpanded(false)}
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 20,
+                background: 'rgba(255,255,255,0.7)',
+                color: '#0071e3',
+                border: '2px solid #0071e3',
+                margin: '16px 0 12px 16px',
+                alignSelf: 'flex-start',
+                cursor: 'pointer',
+                fontSize: 20,
+                boxShadow: '0 2px 8px #0071e322',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'background 0.2s, border 0.2s',
+              }}
+              title="收合側邊欄"
+            >
+              {'<'}
+            </button>
             <div style={{ flex: 1, width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 8, padding: '0 0 0 8px' }}>
               {navItems.map(item => (
                 <div
@@ -112,7 +135,7 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
                     margin: '0 0',
                     borderRadius: 16,
                     background: active === item.key ? '#f2f2f7' : 'none',
-                    color: '#0071e3',
+                    color: active === item.key ? '#0071e3' : '#222',
                     display: 'flex',
                     flexDirection: 'row',
                     alignItems: 'center',
@@ -154,8 +177,8 @@ export default function NavBar({ active, onLangChange, lang = 'zh' }) {
               </div>
             </Dropdown>
           </motion.div>
-        ) : null}
+        )}
       </AnimatePresence>
-    </motion.div>
+    </>
   );
 } 
