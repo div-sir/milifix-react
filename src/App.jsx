@@ -28,20 +28,29 @@ const story = {
 };
 
 const pageMap = {
-  '/': { key: 'home', node: <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh', padding: '2vw' }}>
-    <div style={{ borderRadius: 24, boxShadow: '0 4px 24px 0 #0001', padding: 36, maxWidth: 700, width: '100%', margin: '48px 0', background: 'rgba(255,255,255,0.85)' }}>
-      <Title level={1} style={{ color: '#222', textAlign: 'center', fontFamily: 'Orbitron, Arial, sans-serif' }}>{story.title}</Title>
-      <Paragraph strong style={{ color: '#333', textAlign: 'center' }}>{story.intro}</Paragraph>
-      <Timeline
-        items={story.timeline.map(item => ({
-          color: '#0071e3',
-          children: <span><b>{item.year}</b> {item.event}</span>
-        }))}
-        style={{ margin: '2em 0' }}
-      />
-      <Paragraph italic style={{ color: '#0071e3', textAlign: 'center' }}>{story.vision}</Paragraph>
+  '/': { key: 'home', node: (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh', padding: '2vw' }}>
+      <div style={{ borderRadius: 24, boxShadow: '0 4px 24px 0 #0001', padding: 36, maxWidth: 700, width: '100%', margin: '48px 0', background: 'rgba(255,255,255,0.85)' }}>
+        <BlurText
+          text="Milifix"
+          delay={150}
+          animateBy="words"
+          direction="top"
+          className="text-2xl mb-8"
+        />
+        <Title level={1} style={{ color: '#222', textAlign: 'center', fontFamily: 'Orbitron, Arial, sans-serif' }}>{story.title}</Title>
+        <Paragraph strong style={{ color: '#333', textAlign: 'center' }}>{story.intro}</Paragraph>
+        <Timeline
+          items={story.timeline.map(item => ({
+            color: '#0071e3',
+            children: <span><b>{item.year}</b> {item.event}</span>
+          }))}
+          style={{ margin: '2em 0' }}
+        />
+        <Paragraph italic style={{ color: '#0071e3', textAlign: 'center' }}>{story.vision}</Paragraph>
+      </div>
     </div>
-  </div> },
+  ) },
   '/story': { key: 'story', node: <Story /> },
   '/tech': { key: 'tech', node: <Tech /> },
   '/art': { key: 'art', node: <Art /> },
@@ -89,17 +98,7 @@ function App() {
             <NavBar active={pageKey} lang={lang} onLangChange={setLang} />
           </motion.div>
         </AnimatePresence>
-        {location.pathname === '/' && (
-          <div style={{display:'flex',justifyContent:'center',alignItems:'center',height:'40vh'}}>
-            <BlurText
-              text="Milifix"
-              delay={150}
-              animateBy="words"
-              direction="top"
-              className="text-2xl mb-8"
-            />
-          </div>
-        )}
+        {/* 這裡原本的 BlurText 區塊已移除 */}
         <AnimatePresence mode="wait">
           <motion.div
             key={pageKey + '-' + lang}
