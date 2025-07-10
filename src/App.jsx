@@ -35,7 +35,8 @@ const pageMap = {
         delay={150}
         animateBy="letters"
         direction="top"
-        className="text-7xl font-bold mb-8"
+        className="font-bold mb-8"
+        style={{ fontSize: '7rem', lineHeight: 1.1 }}
       />
     </div>
   ) },
