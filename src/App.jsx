@@ -12,6 +12,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { getI18n, LANGS } from './i18n';
 import BlurText from "./BlurText";
+import SplitText from "./SplitText";
 
 const { Header, Content, Footer } = Layout;
 const { Title, Paragraph } = Typography;
@@ -30,12 +31,18 @@ const story = {
 const pageMap = {
   '/': { key: 'home', node: (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh', padding: '2vw' }}>
-      <BlurText
+      <SplitText
         text="MILIFIX"
-        delay={150}
-        animateBy="letters"
-        direction="top"
-        className="font-bold mb-8"
+        className="font-extrabold mb-8"
+        delay={100}
+        duration={0.6}
+        ease="power3.out"
+        splitType="chars"
+        from={{ opacity: 0, y: 80 }}
+        to={{ opacity: 1, y: 0 }}
+        threshold={0.1}
+        rootMargin="-100px"
+        textAlign="center"
         style={{ fontSize: '14rem', lineHeight: 1.1, fontFamily: 'sans-serif', letterSpacing: '0.08em' }}
       />
     </div>
