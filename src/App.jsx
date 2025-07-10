@@ -11,6 +11,7 @@ import Particles from './Particles';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { getI18n, LANGS } from './i18n';
+import BlurText from "./BlurText";
 
 const { Header, Content, Footer } = Layout;
 const { Title, Paragraph } = Typography;
@@ -88,6 +89,17 @@ function App() {
             <NavBar active={pageKey} lang={lang} onLangChange={setLang} />
           </motion.div>
         </AnimatePresence>
+        {location.pathname === '/' && (
+          <div style={{display:'flex',justifyContent:'center',alignItems:'center',height:'40vh'}}>
+            <BlurText
+              text="Milifix"
+              delay={150}
+              animateBy="words"
+              direction="top"
+              className="text-2xl mb-8"
+            />
+          </div>
+        )}
         <AnimatePresence mode="wait">
           <motion.div
             key={pageKey + '-' + lang}
