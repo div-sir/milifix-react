@@ -31,12 +31,12 @@ const pageMap = {
   '/': { key: 'home', node: (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh', padding: '2vw' }}>
       <BlurText
-        text="Milifix"
+        text="MILIFIX"
         delay={150}
         animateBy="letters"
         direction="top"
         className="font-bold mb-8"
-        style={{ fontSize: '7rem', lineHeight: 1.1 }}
+        style={{ fontSize: '14rem', lineHeight: 1.1, fontFamily: 'sans-serif', letterSpacing: '0.08em' }}
       />
     </div>
   ) },
