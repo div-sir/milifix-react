@@ -33,9 +33,9 @@ const pageMap = {
       <BlurText
         text="Milifix"
         delay={150}
-        animateBy="words"
+        animateBy="letters"
         direction="top"
-        className="text-4xl mb-8"
+        className="text-7xl font-bold mb-8"
       />
     </div>
   ) },
