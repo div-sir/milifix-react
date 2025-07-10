@@ -16,45 +16,18 @@ const navItems = [
 
 export default function NavBar({ active, onLangChange, lang = 'zh' }) {
   const [langOpen, setLangOpen] = useState(false);
-  const [expanded, setExpanded] = useState(true);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const navigate = (path) => { window.location.href = path; };
 
   // 滑鼠移入展開，移出收合
   const handleMouseEnter = () => setExpanded(true);
   const handleMouseLeave = () => setExpanded(false);
 
-  // 動畫參數
-  const blur = 18;
-  const glassBg = 'rgba(255,255,255,0.38)';
-  const glassBorder = '1.5px solid rgba(255,255,255,0.28)';
-  const boxShadow = '0 8px 32px 0 rgba(31,38,135,0.18)';
-
   return (
     <div
       className={`nav-float${expanded ? '' : ' collapsed'}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={{
-        position: 'fixed',
-        top: 32,
-        left: 32,
-        width: expanded ? 220 : 72,
-        height: 520,
-        borderRadius: 28,
-        background: glassBg,
-        border: glassBorder,
-        boxShadow,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        overflow: 'hidden',
-        padding: 0,
-        justifyContent: 'flex-start',
-        zIndex: 200,
-        backdropFilter: `blur(${blur}px) saturate(1.5)`,
-        WebkitBackdropFilter: `blur(${blur}px) saturate(1.5)`
-      }}
     >
       <div className="nav-list">
         {navItems.map(item => (
